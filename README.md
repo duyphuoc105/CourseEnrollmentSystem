@@ -1,37 +1,37 @@
-# 📚 CourseHub — Course Enrollment System
+#  CourseHub — Course Enrollment System
 
 Hệ thống đăng ký khóa học trực tuyến và quản lý lớp học chuyên nghiệp, được xây dựng với cấu trúc tách biệt giữa **Backend (Django REST Framework)** và **Frontend (React.js + Vite)**. Giao diện được tối ưu hóa theo phong cách **Premium Light-Theme Glassmorphism** hiện đại, mượt mà và trực quan.
 
 ---
 
-## 🌟 Tính Năng Nổi Bật
+##  Tính Năng Nổi Bật
 
-### 🎓 Dành Cho Học Viên
+###  Dành Cho Học Viên
 *   **Đăng ký & Đăng nhập**: Bảo mật tài khoản sử dụng chuẩn mã hóa mật khẩu và xác thực Token JWT.
 *   **Tìm kiếm & Đăng ký khóa học**: Duyệt danh sách các khóa học hiện có, tìm kiếm nhanh và đăng ký học với phản hồi tức thì qua hệ thống Toast.
 *   **Quản lý Khóa học đã đăng ký**: Theo dõi trạng thái duyệt học (`Đang chờ`, `Đã duyệt`, `Từ chối`) trực quan bằng các bộ lọc Pills.
 *   **Xem danh sách lớp (Roster)**: Xem danh sách những bạn học cùng lớp đã được ban quản trị phê duyệt chính thức.
 
-### 👨‍💼 Dành Cho Quản Trị Viên (Admin)
+###  Dành Cho Quản Trị Viên (Admin)
 *   **Bảng điều khiển (Admin Dashboard)**: Trang tổng quan quản trị nhanh gọn và trực quan.
 *   **Quản lý khóa học**: Thêm mới, cập nhật thông tin chi tiết (học phí, thời lượng, ngày bắt đầu/kết thúc) hoặc xóa khóa học.
 *   **Quản lý Roster & Phê duyệt**: Xem toàn bộ các lượt đăng ký khóa học, bộ lọc Pills theo trạng thái và thực hiện phê duyệt (`Approve`) hoặc từ chối (`Reject`) lượt đăng ký.
 
-### 🎨 Trải Nghiệm Người Dùng (UX) Premium
+###  Trải Nghiệm Người Dùng (UX) Premium
 *   **Premium Light-Theme**: Thiết kế kính mờ (Glassmorphism) trên nền sáng Off-white thanh lịch, giảm mỏi mắt, tăng độ tương phản của chữ.
 *   **Hệ thống Toast Notification**: Thay thế hoàn toàn hộp thoại `alert()` truyền thống bằng các thông báo Toast trượt mượt mà kèm thanh thời gian đếm ngược.
 *   **Skeleton Loading & Spinners**: Trải nghiệm tải dữ liệu không gián đoạn, mượt mà và trực quan.
 
 ---
 
-## 🛠️ Stack Công Nghệ
+##  Stack Công Nghệ
 
 *   **Backend**: Django 6.0.6, Django REST Framework, djangorestframework-simplejwt (Xác thực JWT), CORS headers, SQLite (Development) / PostgreSQL (Production).
 *   **Frontend**: React.js, Vite 8.1.0, React Router DOM, Axios (HTTP Client), Vanilla CSS.
 
 ---
 
-## 📂 Cấu Trúc Thư Mục Dự Án
+##  Cấu Trúc Thư Mục Dự Án
 
 ```text
 CourseEnrollmentSystem/
@@ -55,7 +55,7 @@ CourseEnrollmentSystem/
 
 ---
 
-## 🚀 Hướng Dẫn Khởi Chạy Local
+##  Hướng Dẫn Khởi Chạy Local
 
 ### 1. Khởi Chạy Backend (Django REST Framework)
 Mở một terminal mới tại thư mục gốc:
