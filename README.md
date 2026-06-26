@@ -89,8 +89,3 @@ npm run dev
 
 ---
 
-## 🌎 Hướng Dẫn Triển Khai (Deployment)
-
-*   **Backend (Render)**: Deploy mã nguồn lên Render kết nối Postgres DB, cấu hình `build.sh` để di chuyển dữ liệu và cài đặt gói tự động.
-*   **Frontend (Vercel)**: Chọn thư mục gốc deploy là `frontend`, thiết lập framework `Vite`, Vercel sẽ tự động tạo bản build tĩnh trong thư mục `dist`.
-*   *Hướng dẫn deploy chi tiết từng bước xem tại [deployment_guide.md](file:///C:/Users/PC/.gemini/antigravity-ide/brain/9f105db2-578a-4cfc-9f3f-633ffd901a86/deployment_guide.md).*
