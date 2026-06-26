@@ -1,71 +1,93 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useToast } from "./ToastContext";
 
 function Navbar() {
 
     const navigate = useNavigate();
     const location = useLocation();
+    const toast = useToast();
+
+    const [scrolled, setScrolled] = useState(false);
+    const [menuOpen, setMenuOpen] = useState(false);
 
     const loggedIn = localStorage.getItem("access");
-
-    // Tạm thời xác định admin theo username
     const username = localStorage.getItem("username");
     const isAdmin = username === "admin";
 
-    const logout = () => {
+    useEffect(() => {
+        const handleScroll = () => {
+            setScrolled(window.scrollY > 20);
+        };
+        window.addEventListener("scroll", handleScroll);
+        return () => window.removeEventListener("scroll", handleScroll);
+    }, []);
 
+    // Close menu on route change
+    useEffect(() => {
+        setMenuOpen(false);
+    }, [location.pathname]);
+
+    const logout = () => {
         localStorage.removeItem("access");
         localStorage.removeItem("refresh");
         localStorage.removeItem("username");
 
-        alert("Đăng xuất thành công!");
+        toast.success("Đăng xuất thành công!");
 
         navigate("/login");
     };
 
+    const isActive = (path) => {
+        if (path === "/admin") {
+            return location.pathname.startsWith("/admin");
+        }
+        return location.pathname === path;
+    };
+
     return (
 
-        <nav className="navbar navbar-expand-lg navbar-dark bg-primary shadow">
+        <nav className={`premium-navbar ${scrolled ? "scrolled" : ""}`}>
 
-            <div className="container">
+            <div className="navbar-container">
 
                 <Link
-                    className="navbar-brand fw-bold"
+                    className="navbar-brand-premium"
                     to="/"
                 >
-                    📚 Course Enrollment
+                    <span className="brand-icon">📚</span>
+                    CourseHub
                 </Link>
 
                 <button
-                    className="navbar-toggler"
-                    type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#navbarNav"
+                    className={`nav-toggle ${menuOpen ? "open" : ""}`}
+                    onClick={() => setMenuOpen(!menuOpen)}
+                    aria-label="Toggle navigation"
                 >
-                    <span className="navbar-toggler-icon"></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
                 </button>
 
-                <div
-                    className="collapse navbar-collapse"
-                    id="navbarNav"
-                >
+                <div className={`navbar-menu ${menuOpen ? "open" : ""}`}>
 
-                    <ul className="navbar-nav ms-auto align-items-center">
+                    <ul className="navbar-links">
 
-                        <li className="nav-item">
+                        <li>
                             <Link
-                                className={`nav-link ${location.pathname === "/" ? "active fw-bold" : ""}`}
+                                className={`nav-link-premium ${isActive("/") ? "active" : ""}`}
                                 to="/"
                             >
-                                🏠 Home
+                                Trang chủ
                             </Link>
                         </li>
 
-                        <li className="nav-item">
+                        <li>
                             <Link
-                                className={`nav-link ${location.pathname === "/courses" ? "active fw-bold" : ""}`}
+                                className={`nav-link-premium ${isActive("/courses") ? "active" : ""}`}
                                 to="/courses"
                             >
-                                📖 Courses
+                                Khóa học
                             </Link>
                         </li>
 
@@ -73,35 +95,25 @@ function Navbar() {
 
                             <>
 
-                                <li className="nav-item">
+                                <li>
                                     <Link
-                                        className={`nav-link ${location.pathname === "/my-enrollments" ? "active fw-bold" : ""}`}
+                                        className={`nav-link-premium ${isActive("/my-enrollments") ? "active" : ""}`}
                                         to="/my-enrollments"
                                     >
-                                        🎓 My Courses
+                                        Đã đăng ký
                                     </Link>
                                 </li>
 
-                                {/* Menu Admin */}
                                 {isAdmin && (
-                                    <li className="nav-item">
+                                    <li>
                                         <Link
-                                            className={`nav-link ${location.pathname.startsWith("/admin") ? "active fw-bold" : ""}`}
+                                            className={`nav-link-premium ${isActive("/admin") ? "active" : ""}`}
                                             to="/admin"
                                         >
-                                            ⚙️ Admin
+                                            Quản trị
                                         </Link>
                                     </li>
                                 )}
-
-                                <li className="nav-item ms-2">
-                                    <button
-                                        className="btn btn-danger btn-sm"
-                                        onClick={logout}
-                                    >
-                                        🚪 Logout
-                                    </button>
-                                </li>
 
                             </>
 
@@ -109,21 +121,21 @@ function Navbar() {
 
                             <>
 
-                                <li className="nav-item">
+                                <li>
                                     <Link
-                                        className={`nav-link ${location.pathname === "/login" ? "active fw-bold" : ""}`}
+                                        className={`nav-link-premium ${isActive("/login") ? "active" : ""}`}
                                         to="/login"
                                     >
-                                        Login
+                                        Đăng nhập
                                     </Link>
                                 </li>
 
-                                <li className="nav-item">
+                                <li>
                                     <Link
-                                        className={`nav-link ${location.pathname === "/register" ? "active fw-bold" : ""}`}
+                                        className="btn-premium btn-gradient btn-sm-premium"
                                         to="/register"
                                     >
-                                        Register
+                                        Đăng ký
                                     </Link>
                                 </li>
 
@@ -132,6 +144,25 @@ function Navbar() {
                         )}
 
                     </ul>
+
+                    {loggedIn && (
+
+                        <div className="nav-user-section">
+
+                            <div className="user-avatar">
+                                {username ? username.charAt(0) : "U"}
+                            </div>
+
+                            <button
+                                className="btn-logout"
+                                onClick={logout}
+                            >
+                                Đăng xuất
+                            </button>
+
+                        </div>
+
+                    )}
 
                 </div>
 

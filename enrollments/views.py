@@ -14,11 +14,16 @@ class EnrollmentViewSet(viewsets.ModelViewSet):
         user = self.request.user
         queryset = Enrollment.objects.all()
 
-        # User chỉ xem đăng ký của mình
-        if not user.is_staff:
-            queryset = queryset.filter(user=user)
+        # Cho phép filter theo khóa học
+        course_id = self.request.query_params.get("course")
+        if course_id:
+            queryset = queryset.filter(course_id=course_id)
+        else:
+            # Nếu không tìm theo khóa học cụ thể, user thường chỉ xem được đăng ký của mình
+            if not user.is_staff:
+                queryset = queryset.filter(user=user)
 
-        # Admin filter theo trạng thái
+        # Filter theo trạng thái
         status = self.request.query_params.get("status")
         if status:
             queryset = queryset.filter(status=status)

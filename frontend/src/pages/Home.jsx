@@ -2,99 +2,98 @@ import { Link } from "react-router-dom";
 
 function Home() {
     return (
-        <div className="container mt-5">
+        <>
+            {/* Hero Section */}
+            <section className="hero-section">
 
-            <div className="p-5 mb-5 bg-light rounded-4 shadow text-center">
+                <div className="container-premium">
 
-                <h1 className="display-4 fw-bold text-primary">
-                    📚 Course Enrollment System
-                </h1>
+                    <div className="hero-badge">
+                        ✨ Nền tảng học tập hàng đầu
+                    </div>
 
-                <p className="lead mt-3">
-                    Hệ thống đăng ký khóa học trực tuyến được xây dựng bằng
-                    <strong> ReactJS </strong>
-                    và
-                    <strong> Django REST Framework</strong>.
-                </p>
+                    <h1 className="hero-title">
+                        <span className="gradient-text">Course Enrollment</span>
+                        <br />
+                        System
+                    </h1>
 
-                <p className="text-muted">
-                    Người dùng có thể xem danh sách khóa học, đăng ký khóa học và theo dõi trạng thái đăng ký.
-                </p>
+                    <p className="hero-description">
+                        Hệ thống đăng ký khóa học trực tuyến được xây dựng với
+                        <strong> ReactJS</strong> và <strong>Django REST Framework</strong>.
+                        Dễ dàng quản lý, đăng ký và theo dõi khóa học.
+                    </p>
 
-                <Link
-                    to="/courses"
-                    className="btn btn-primary btn-lg mt-3"
-                >
-                    Xem danh sách khóa học
-                </Link>
+                    <div className="hero-actions">
 
-            </div>
+                        <Link
+                            to="/courses"
+                            className="btn-premium btn-gradient btn-lg-premium"
+                        >
+                            Khám phá khóa học
+                            <span>→</span>
+                        </Link>
 
-            <div className="row">
-
-                <div className="col-md-4 mb-4">
-
-                    <div className="card shadow h-100">
-
-                        <div className="card-body text-center">
-
-                            <h2>📖</h2>
-
-                            <h5>Xem khóa học</h5>
-
-                            <p>
-                                Xem toàn bộ khóa học được quản lý bởi hệ thống.
-                            </p>
-
-                        </div>
+                        <Link
+                            to="/register"
+                            className="btn-premium btn-glass btn-lg-premium"
+                        >
+                            Tạo tài khoản
+                        </Link>
 
                     </div>
 
                 </div>
 
-                <div className="col-md-4 mb-4">
+            </section>
 
-                    <div className="card shadow h-100">
+            {/* Features */}
+            <section className="features-grid">
 
-                        <div className="card-body text-center">
+                <div className="feature-card animate-fade-in-up stagger-1">
 
-                            <h2>📝</h2>
-
-                            <h5>Đăng ký khóa học</h5>
-
-                            <p>
-                                Đăng ký nhanh chóng chỉ với một lần nhấn.
-                            </p>
-
-                        </div>
-
+                    <div className="feature-icon blue">
+                        📖
                     </div>
+
+                    <h3>Xem khóa học</h3>
+
+                    <p>
+                        Duyệt toàn bộ danh sách khóa học chất lượng cao, được quản lý bởi đội ngũ chuyên nghiệp.
+                    </p>
 
                 </div>
 
-                <div className="col-md-4 mb-4">
+                <div className="feature-card animate-fade-in-up stagger-2">
 
-                    <div className="card shadow h-100">
-
-                        <div className="card-body text-center">
-
-                            <h2>✅</h2>
-
-                            <h5>Theo dõi trạng thái</h5>
-
-                            <p>
-                                Kiểm tra trạng thái Pending, Approved hoặc Rejected.
-                            </p>
-
-                        </div>
-
+                    <div className="feature-icon violet">
+                        ⚡
                     </div>
+
+                    <h3>Đăng ký nhanh chóng</h3>
+
+                    <p>
+                        Đăng ký khóa học chỉ với một cú nhấp chuột. Nhanh gọn, tiện lợi, không phức tạp.
+                    </p>
 
                 </div>
 
-            </div>
+                <div className="feature-card animate-fade-in-up stagger-3">
 
-        </div>
+                    <div className="feature-icon green">
+                        ✅
+                    </div>
+
+                    <h3>Theo dõi trạng thái</h3>
+
+                    <p>
+                        Kiểm tra trạng thái đăng ký theo thời gian thực — Pending, Approved hoặc Rejected.
+                    </p>
+
+                </div>
+
+            </section>
+        </>
     );
 }
 

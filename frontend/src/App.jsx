@@ -18,37 +18,39 @@ function App() {
     <>
       <Navbar />
 
-      <Routes>
+      <main className="page-content">
+        <Routes>
 
-        <Route path="/" element={<Home />} />
+          <Route path="/" element={<Home />} />
 
-        <Route path="/courses" element={<Courses />} />
+          <Route path="/courses" element={<Courses />} />
 
-        <Route path="/login" element={<Login />} />
+          <Route path="/login" element={<Login />} />
 
-        <Route path="/register" element={<Register />} />
+          <Route path="/register" element={<Register />} />
 
-        <Route
-          path="/my-enrollments"
-          element={<MyEnrollments />}
-        />
+          <Route
+            path="/my-enrollments"
+            element={<MyEnrollments />}
+          />
 
-        <Route
-          path="/admin"
-          element={<AdminDashboard />}
-        />
+          <Route
+            path="/admin"
+            element={<AdminDashboard />}
+          />
 
-        <Route
-          path="/admin/courses"
-          element={<ManageCourses />}
-        />
+          <Route
+            path="/admin/courses"
+            element={<ManageCourses />}
+          />
 
-        <Route
-          path="/admin/enrollments"
-          element={<ManageEnrollments />}
-        />
+          <Route
+            path="/admin/enrollments"
+            element={<ManageEnrollments />}
+          />
 
-      </Routes>
+        </Routes>
+      </main>
 
     </>
   );

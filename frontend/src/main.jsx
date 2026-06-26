@@ -5,14 +5,15 @@ import {
   BrowserRouter,
 } from "react-router-dom";
 
-import "bootstrap/dist/css/bootstrap.min.css";
-
 import "./index.css";
 
 import App from "./App";
+import { ToastProvider } from "./components/ToastContext";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <BrowserRouter>
-    <App />
+    <ToastProvider>
+      <App />
+    </ToastProvider>
   </BrowserRouter>
 );

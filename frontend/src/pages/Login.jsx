@@ -1,16 +1,22 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import api from "../api/axios";
+import { useToast } from "../components/ToastContext";
 
 function Login() {
 
     const navigate = useNavigate();
+    const toast = useToast();
 
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const [showPassword, setShowPassword] = useState(false);
+    const [submitting, setSubmitting] = useState(false);
 
     const handleLogin = async (e) => {
         e.preventDefault();
+
+        setSubmitting(true);
 
         try {
 
@@ -23,108 +29,119 @@ function Login() {
             localStorage.setItem("refresh", response.data.refresh);
             localStorage.setItem("username", username);
 
-            alert("Đăng nhập thành công!");
+            toast.success("Đăng nhập thành công!");
 
             navigate("/courses");
 
         } catch (error) {
 
-            alert("Sai tài khoản hoặc mật khẩu!");
+            toast.error("Sai tài khoản hoặc mật khẩu!");
 
+        } finally {
+            setSubmitting(false);
         }
     };
 
     return (
 
-        <div className="container py-5">
+        <div className="auth-page">
 
-            <div className="row justify-content-center">
+            <div className="auth-card">
 
-                <div className="col-md-6 col-lg-5">
+                <div className="auth-icon">
+                    🔐
+                </div>
 
-                    <div className="card shadow-lg border-0">
+                <h2 className="auth-title">
+                    Đăng nhập
+                </h2>
 
-                        <div className="card-body p-4">
+                <p className="auth-subtitle">
+                    Chào mừng bạn quay trở lại CourseHub
+                </p>
 
-                            <div className="text-center mb-4">
+                <form onSubmit={handleLogin}>
 
-                                <h1 className="text-primary">
-                                    🔐
-                                </h1>
+                    <div className="form-group">
 
-                                <h3 className="fw-bold">
-                                    Đăng nhập
-                                </h3>
+                        <label className="form-label-premium">
+                            Tên đăng nhập
+                        </label>
 
-                                <p className="text-muted">
-                                    Course Enrollment System
-                                </p>
-
-                            </div>
-
-                            <form onSubmit={handleLogin}>
-
-                                <div className="mb-3">
-
-                                    <label className="form-label">
-                                        Tên đăng nhập
-                                    </label>
-
-                                    <input
-                                        className="form-control"
-                                        placeholder="Nhập tên đăng nhập"
-                                        value={username}
-                                        onChange={(e) => setUsername(e.target.value)}
-                                        required
-                                    />
-
-                                </div>
-
-                                <div className="mb-4">
-
-                                    <label className="form-label">
-                                        Mật khẩu
-                                    </label>
-
-                                    <input
-                                        type="password"
-                                        className="form-control"
-                                        placeholder="Nhập mật khẩu"
-                                        value={password}
-                                        onChange={(e) => setPassword(e.target.value)}
-                                        required
-                                    />
-
-                                </div>
-
-                                <button
-                                    className="btn btn-primary w-100"
-                                >
-                                    Đăng nhập
-                                </button>
-
-                            </form>
-
-                            <hr />
-
-                            <p className="text-center mb-0">
-
-                                Chưa có tài khoản?
-
-                                <Link
-                                    to="/register"
-                                    className="ms-2"
-                                >
-                                    Đăng ký ngay
-                                </Link>
-
-                            </p>
-
-                        </div>
+                        <input
+                            className="input-premium"
+                            placeholder="Nhập tên đăng nhập"
+                            value={username}
+                            onChange={(e) => setUsername(e.target.value)}
+                            required
+                            autoComplete="username"
+                        />
 
                     </div>
 
-                </div>
+                    <div className="form-group" style={{ position: "relative" }}>
+
+                        <label className="form-label-premium">
+                            Mật khẩu
+                        </label>
+
+                        <input
+                            type={showPassword ? "text" : "password"}
+                            className="input-premium"
+                            style={{ paddingRight: "48px" }}
+                            placeholder="Nhập mật khẩu"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            required
+                            autoComplete="current-password"
+                        />
+
+                        <button
+                            type="button"
+                            onClick={() => setShowPassword(!showPassword)}
+                            style={{
+                                position: "absolute",
+                                right: "14px",
+                                top: "40px",
+                                background: "none",
+                                border: "none",
+                                color: "var(--text-muted)",
+                                cursor: "pointer",
+                                fontSize: "16px",
+                                padding: "4px",
+                            }}
+                            tabIndex={-1}
+                        >
+                            {showPassword ? "🙈" : "👁"}
+                        </button>
+
+                    </div>
+
+                    <button
+                        className="btn-premium btn-gradient"
+                        style={{ width: "100%", marginTop: "8px" }}
+                        disabled={submitting}
+                    >
+                        {submitting ? (
+                            <>
+                                <span className="spinner-premium" style={{ width: 18, height: 18, borderWidth: 2 }} />
+                                Đang xử lý...
+                            </>
+                        ) : (
+                            "Đăng nhập"
+                        )}
+                    </button>
+
+                </form>
+
+                <hr className="auth-divider" />
+
+                <p className="auth-footer">
+                    Chưa có tài khoản?{" "}
+                    <Link to="/register">
+                        Đăng ký ngay
+                    </Link>
+                </p>
 
             </div>
 
